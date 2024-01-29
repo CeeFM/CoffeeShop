@@ -9,6 +9,7 @@ namespace CoffeeShop
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddTransient<IBeanVarietyRepository, BeanVarietyRepository>();
+            builder.Services.AddTransient<ICoffeeRepository, CoffeeRepository>();
 
             // Add services to the container.
 
