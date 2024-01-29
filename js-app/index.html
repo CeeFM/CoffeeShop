@@ -4,13 +4,21 @@
     <title>Coffee Shop</title>
 </head>
 <body>
-   <button id="run-button">Run It!</button>
+   <button id="run-button">LIST ALL COFFEE BEANS NOW</button>
+   <br>
+   <br>
+   <button id="coffee-button">LIST ALL COFFEE TYPES NOW</button>
+   <br />
    <div id="results"></div>
+   <br />
    <form id="beanForm" name="beanForm" action="/main.js" onsubmit="addNewBean()" method="post">
         Gimme the deets on this new bean, dog, you can trust me: <br />
         <input type="text" id="beanTitle" name="beanTitle" class="form-control" placeholder="Bean Name" value="" required>
+        <br />
         <input type="text" id="beanRegion" name="beanRegion" class="form-control" placeholder="Bean Region" value="" required>
+        <br />
         <input type="text" id="beanNotes" name="beanNotes" class="form-control" placeholder="Bean Notes (optional)" value="">
+        <br />
         <button id="submit" type="submit">Submit</button>
    </form>
    <script src="main.js"></script>
