@@ -6,6 +6,13 @@
 <body>
    <button id="run-button">Run It!</button>
    <div id="results"></div>
+   <form id="beanForm" name="beanForm" action="/main.js" onsubmit="addNewBean()" method="post">
+        Gimme the deets on this new bean, dog, you can trust me: <br />
+        <input type="text" id="beanTitle" name="beanTitle" class="form-control" placeholder="Bean Name" value="" required>
+        <input type="text" id="beanRegion" name="beanRegion" class="form-control" placeholder="Bean Region" value="" required>
+        <input type="text" id="beanNotes" name="beanNotes" class="form-control" placeholder="Bean Notes (optional)" value="">
+        <button id="submit" type="submit">Submit</button>
+   </form>
    <script src="main.js"></script>
 </body>
 </html>
