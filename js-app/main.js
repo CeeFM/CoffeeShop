@@ -13,8 +13,6 @@ let htmlList = "";
 addCoffee.addEventListener("click", () => {
     getAllBeanVarieties()
     .then(beanVarieties => {
-        console.log(beanVarieties);
-        let submitbtn;
         for (let i = 0; i < beanVarieties.length; i++) {
             htmlList += `<option value="${i}">${beanVarieties[i].name}</option>`
             console.log(htmlList);
@@ -33,8 +31,6 @@ addCoffee.addEventListener("click", () => {
         <br />
         <button id="submit-coffee-btn" type="submit"">Submit</button>`;
     })
-    .then(submitbtn = document.querySelector("#submit-coffee-btn"))
-    .then(submitbtn.addEventListener("click", addNewCoffee))
     
 })
 
@@ -77,7 +73,8 @@ function getAllCoffees() {
     return fetch(coffeeurl).then(resp => resp.json());
 }
 
-function addNewBean() {
+function addNewBean(e) {
+    e.preventDefault();
     let name = document.getElementById("beanTitle").value;
     let region = document.getElementById("beanRegion").value;
     let notes = document.getElementById("beanNotes").value;
@@ -93,23 +90,25 @@ function addNewBean() {
             "Content-type": "application/json; charset=UTF-8"
         }
     });
+
+    beanForm.reset(); 
 }
 
-function addNewCoffee() {
-console.log("what the fuck is going on")
-    // let title = document.getElementById("coffee").value;
-    // let beanvarietyid = document.getElementById("beanVarieties").value;
+function addNewCoffee(e) {
+    e.preventDefault();
+    let title = document.getElementById("coffee").value;
+    let beanvarietyid = document.getElementById("beanVarieties").value;
 
-    // fetch(coffeeurl, {
-    //     method: "POST",
-    //     body: JSON.stringify({
-    //         Title: title,
-    //         BeanVarietyId: beanvarietyid 
-    //     }),
-    //     headers: {
-    //         "Content-type": "application/json; charset=UTF-8"
-    //     }
-    // })
-    // .then(console.log("got to this then block"))
+    fetch(coffeeurl, {
+        method: "POST",
+        body: JSON.stringify({
+            Title: title,
+            BeanVarietyId: beanvarietyid 
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+    .then(console.log("got to this then block"))
 
 }
