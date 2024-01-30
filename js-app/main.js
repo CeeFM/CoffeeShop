@@ -3,40 +3,8 @@ const coffeeurl = "https://localhost:44346/api/coffee/";
 
 const button = document.querySelector("#run-button");
 const coffeeButton = document.querySelector("#coffee-button");
-const coffeeForm = document.querySelector("#coffeeForm");
-const addCoffee = document.querySelector("#add-coffee");
 const results = document.querySelector("#results");
 const beanForm = document.querySelector("#beanForm");
-const coffeeList = document.querySelector("#beanVarieties");
-let htmlList = "";
-
-addCoffee.addEventListener("click", () => {
-    getAllBeanVarieties()
-    .then(beanVarieties => {
-        console.log(beanVarieties);
-        let submitbtn;
-        for (let i = 0; i < beanVarieties.length; i++) {
-            htmlList += `<option value="${i}">${beanVarieties[i].name}</option>`
-            console.log(htmlList);
-        }
-
-        coffeeForm.innerHTML = `
-        Gimme all the faxx on this new type of coffee you've created, my man, I won't tell a SOUL: <br />
-        <input type="text" id="coffee" name="coffeeTitle" class="form-control" placeholder="Coffee Name" value="" required>
-        <br />
-        <label for="beanVarieties">Choose a dang bean:</label>
-        <br>
-        <select id="beanVarieties" name="beanVarieties">
-        ${htmlList}
-        </select>
-        <br />
-        <br />
-        <button id="submit-coffee-btn" type="submit"">Submit</button>`;
-    })
-    .then(submitbtn = document.querySelector("#submit-coffee-btn"))
-    .then(submitbtn.addEventListener("click", addNewCoffee))
-    
-})
 
 button.addEventListener("click", () => {
     getAllBeanVarieties()
@@ -46,11 +14,6 @@ button.addEventListener("click", () => {
             for (let i = 0; i < beanVarieties.length; i++) {
                 results.innerHTML += `<br /> #${i + 1}: <strong>${beanVarieties[i].name}<strong> - <i>${beanVarieties[i].region}</i> <br /> `
             }
-            results.innerHTML += `<br /><button id="clear">CLEAR</button><br />`
-            let clearButton = document.querySelector("#clear");
-            clearButton.addEventListener("click", () => {
-            results.innerHTML = "";
-            })
         })
 });
 
@@ -61,11 +24,6 @@ coffeeButton.addEventListener("click", () => {
             for (let i = 0; i < beanVarieties.length; i++) {
                 results.innerHTML += `<br /> #${i + 1}: <strong>${beanVarieties[i].title}</strong> <br /> `
             }
-            results.innerHTML += `<br /><button id="clear">CLEAR</button><br />`
-            let clearButton = document.querySelector("#clear");
-            clearButton.addEventListener("click", () => {
-                results.innerHTML = "";
-            })
         })
 });
 
@@ -77,7 +35,8 @@ function getAllCoffees() {
     return fetch(coffeeurl).then(resp => resp.json());
 }
 
-function addNewBean() {
+function addNewBean(e) {
+    e.preventDefault();
     let name = document.getElementById("beanTitle").value;
     let region = document.getElementById("beanRegion").value;
     let notes = document.getElementById("beanNotes").value;
@@ -93,10 +52,12 @@ function addNewBean() {
             "Content-type": "application/json; charset=UTF-8"
         }
     });
+
+    beanForm.reset();
 }
 
-function addNewCoffee() {
-console.log("what the fuck is going on")
+// function addNewCoffee() {
+// console.log("what the fuck is going on")
     // let title = document.getElementById("coffee").value;
     // let beanvarietyid = document.getElementById("beanVarieties").value;
 
@@ -111,5 +72,3 @@ console.log("what the fuck is going on")
     //     }
     // })
     // .then(console.log("got to this then block"))
-
-}
